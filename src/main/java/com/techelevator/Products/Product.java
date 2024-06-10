@@ -1,17 +1,18 @@
-package com.techelevator;
+package com.techelevator.Products;
 
-public class Product {
+public abstract class Product {
     private final String slot;
     private final String name;
     private final long price;
     private final String typeName;
-    private int amt=5;
+    private int amt;
 
     public Product(String typeName, long price, String name, String slot) {
         this.typeName = typeName;
         this.price = price;
         this.name = name;
         this.slot = slot;
+        amt=5;
     }
 
     public String getName() {
@@ -27,9 +28,11 @@ public class Product {
         return amt;
     }
 
-    public void purchase() {
-        amt = amt-1;
+    public void amtReduce(){
+        amt=amt-1;
     }
+
+    public abstract String purchaseMessage();
 
     @Override
     public String toString() {
