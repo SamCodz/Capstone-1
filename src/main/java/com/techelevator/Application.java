@@ -1,18 +1,23 @@
 package com.techelevator;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Application {
 	public static Scanner input = new Scanner(System.in);
 	public static int userInput=0;
-	public static long userMoney=0;
+	public static double userMoney=0;
+	public static Menus options = new Menus();
+	public static FileReader fileReader = new FileReader("vendingmachine.csv");
+	public static Inventory inventory = new Inventory();
 
 	public static void main(String[] args) {
-		System.out.println("3");
+		inventory.addInventory(fileReader.productList());
+
 		do {
-			userInput = menu();
+			userInput = options.mainMenu();
 			if (userInput == 1){
-				//Display items
+				inventory.displayAll();
 			} else if (userInput == 2){
 				purchaseFunction();
 			} else if (userInput == 4){
@@ -24,36 +29,12 @@ public class Application {
 
 	}
 
-	public static int menu(){
-		System.out.println("****************************************************************************");
-		System.out.println("OUR VENDING MACHINE");
-		System.out.println("****************************************************************************\n");
-		System.out.println("(1) Display Vending Machine Items");
-		System.out.println("(2) Purchase");
-		System.out.println("(3) Exit");
-
-		return input.nextInt();
-
-	}
-
-	public static int purchaseMenu(){
-		System.out.println("****************************************************************************");
-		System.out.println("OUR VENDING MACHINE");
-		System.out.println("****************************************************************************\n");
-		System.out.println("Current Money Provided: $" + userMoney);
-
-		System.out.println("(1) Feed Money");
-		System.out.println("(2) Select Product");
-		System.out.println("(3) Finish Transaction");
-		return input.nextInt();
-
-	}
 
 	public static void purchaseFunction(){
 
 
 		do {
-			userInput = purchaseMenu();
+			userInput = options.purchaseMenu(0);
 			if (userInput == 1){
 				System.out.println("7.i");
 			} else if (userInput == 2){

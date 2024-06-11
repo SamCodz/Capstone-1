@@ -3,23 +3,33 @@ package com.techelevator.Products;
 public abstract class Product {
     private final String slot;
     private final String name;
-    private final long price;
+    private final Double price;
     private final String typeName;
     private int amt;
 
-    public Product(String typeName, long price, String name, String slot) {
-        this.typeName = typeName;
-        this.price = price;
-        this.name = name;
-        this.slot = slot;
+    public Product(String productInformation) {
+        String[] separateNames = productInformation.split("\\|");
+
+        this.typeName = separateNames[3];
+        this.price = Double.parseDouble(separateNames[2]);
+        this.name = separateNames[1];
+        this.slot = separateNames[0];
         amt=5;
+    }
+
+    public String getSlot() {
+        return slot;
+    }
+
+    public String getTypeName() {
+        return typeName;
     }
 
     public String getName() {
         return name;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -36,10 +46,16 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "slot='" + slot + '|' +
-                ", name='" + name + '|' +
-                ", price=" + price + '|'+
-                ", typeName='" + typeName;
+        return  slot  +
+                " " + name  +
+                " $" + price +
+                " " + typeName +
+                " " + (this.getAmt()>0? this.getAmt(): "Sold Out");
+//        return "slot='" + slot  +
+//                " name='" + name  +
+//                " price=" + price +
+//                " typeName='" + typeName + " " + (this.getAmt()>0? this.getAmt(): "Sold Out");
+
     }
 }
 
