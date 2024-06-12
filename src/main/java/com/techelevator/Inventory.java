@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-    private List<Product> productlist = new ArrayList<Product>();
+    private final List<Product> productlist = new ArrayList<Product>();
 
     public Inventory() {
     }
 
     public void displayAll(){
+        System.out.println("Slot   Item Name    Price       Type        Stock");
         for(Product product : productlist){
             System.out.println(product.toString());
         }
@@ -36,5 +37,14 @@ public class Inventory {
 //            System.out.println(product.getTypeName());
 //            System.out.println(product.getSlot());
 //        }
+    }
+
+    public Product buyProduct(String slotID){
+        for(Product product : productlist){
+            if(product.getSlot().equalsIgnoreCase(slotID)){
+                return product;
+            }
+        }
+        return null;
     }
 }

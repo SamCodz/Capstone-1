@@ -1,21 +1,21 @@
 package com.techelevator;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Application {
 	public static Scanner input = new Scanner(System.in);
 	public static int userInput=0;
 	public static double userMoney=0;
-	public static Menus options = new Menus();
+	public static Menus menu = new Menus();
 	public static FileReader fileReader = new FileReader("vendingmachine.csv");
 	public static Inventory inventory = new Inventory();
+	public static Coinbox coinbox = new Coinbox(inventory);
 
 	public static void main(String[] args) {
 		inventory.addInventory(fileReader.productList());
 
 		do {
-			userInput = options.mainMenu();
+			userInput = menu.mainMenu();
 			if (userInput == 1){
 				inventory.displayAll();
 			} else if (userInput == 2){
@@ -34,14 +34,17 @@ public class Application {
 
 
 		do {
-			userInput = options.purchaseMenu(0);
+			userInput = menu.purchaseMenu(coinbox.getUserFunds());
 			if (userInput == 1){
-				System.out.println("7.i");
+
+				coinbox.addFunds(menu.feedMenu());
 			} else if (userInput == 2){
-				System.out.println("7.ii");
+				inventory.displayAll();
+				coinbox.boughtProduct(menu.buyProduct());
+				menu.pause();
 
 			} else if (userInput == 3){
-				System.out.println("7.iii");
+				coinbox.returnChange();
 			}
 
 		}while(userInput!=3);
