@@ -13,27 +13,26 @@ public class Coinbox {
         this.inventory = inventory;
     }
 
-    public void addFunds(int funds){
-
-         userFunds = userFunds + funds;
-     }
+    public void addFunds(int funds) {
+        userFunds = userFunds + funds;
+    }
 
     public double getUserFunds() {
         return userFunds;
     }
 
-    public void boughtProduct(String slotID){
-        product= inventory.buyProduct(slotID);
+    public void boughtProduct(String slotID) {
+        product = inventory.buyProduct(slotID);
 
-        if (product == null){
-            System.out.println("The slot ID "+ slotID + " does not exist");
+        if (product == null) {
+            System.out.println("The slot ID " + slotID + " does not exist");
             return;
         }
         if (product.getAmt() <= 0) {
-            System.out.println("The Item at " + product.getSlot() + " named " +product.getName() + " is sold out");
+            System.out.println("The Item at " + product.getSlot() + " named " + product.getName() + " is sold out");
             return;
         }
-        if (product.getPrice() > userFunds){
+        if (product.getPrice() > userFunds) {
             System.out.println("Insufficient funds");
             return;
         }
@@ -43,17 +42,16 @@ public class Coinbox {
         System.out.println(product.purchaseMessage());
     }
 
-    public void returnChange(){
-
-        while(userFunds >0.25){
+    public void returnChange() {
+        while (userFunds > 0.25) {
             userFunds = userFunds - 0.25;
             quarter++;
         }
-        while(userFunds >0.10){
+        while (userFunds > 0.10) {
             userFunds = userFunds - 0.10;
             dime++;
         }
-        while(userFunds >0.05){
+        while (userFunds > 0.05) {
             userFunds = userFunds - 0.05;
             nickle++;
         }
